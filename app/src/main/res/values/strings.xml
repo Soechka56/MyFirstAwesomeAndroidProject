@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">MyFirstAwesomeAndroidProject</string>
+    <string name="title_activity_act2">Act2</string>
+    <string name="title_activity_act3">Act3</string>
+    <string name="title_activity_act1">Act1</string>
+
+    <string name="enter_text">введите свой текст</string>
+    <string name="screen2_default">экран 2</string>
+    <string name="screen3_default">экран 3</string>
+
+    <string name="btn_to_screen1">на экран 1</string>
+    <string name="btn_to_screen2">на экран 2</string>
+    <string name="btn_to_screen3">на экран 3</string>
+    <string name="btn_to_screen1_new">начать сначала</string>
 </resources>
