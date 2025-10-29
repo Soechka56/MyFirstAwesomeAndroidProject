@@ -1,53 +1,77 @@
 package com.soechka1.myfirstawesomeandroidproject.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import com.soechka1.myfirstawesomeandroidproject.ui.AppTheme
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+private val PurpleLightScheme = lightColorScheme(
+    primary = Purple40,
+    onPrimary = White,
+    secondary = PurpleGrey40,
+    tertiary = Pink40,
+    background = LightGray,
+    surface = White,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+private val PurpleDarkScheme = darkColorScheme(
+    primary = Purple80,
+    onPrimary = Black,
+    secondary = PurpleGrey80,
+    tertiary = Pink80,
+    background = DarkBackground,
+    surface = DarkSurface,
+)
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+private val RedLightScheme = lightColorScheme(
+    primary = RedDark,
+    onPrimary = White,
+    secondary = RedMain,
+    tertiary = RedMain,
+    background = RedLight,
+    surface = White,
+)
+
+private val RedDarkScheme = darkColorScheme(
+    primary = RedMain,
+    onPrimary = Black,
+    secondary = RedDark,
+    tertiary = RedMain,
+    background = RedVeryDark,
+    surface = RedDarkSurface,
+)
+
+private val GreenLightScheme = lightColorScheme(
+    primary = GreenDark,
+    onPrimary = White,
+    secondary = GreenMain,
+    tertiary = GreenMain,
+    background = GreenLight,
+    surface = White,
+)
+
+private val GreenDarkScheme = darkColorScheme(
+    primary = GreenMain,
+    onPrimary = Black,
+    secondary = GreenDark,
+    tertiary = GreenMain,
+    background = GreenVeryDark,
+    surface = GreenDarkSurface,
 )
 
 @Composable
 fun MyFirstAwesomeAndroidProjectTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    theme: AppTheme = AppTheme.PURPLE,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+    // where theme auto apply
+    val colorScheme = when (theme) {
+        AppTheme.PURPLE -> if (darkTheme) PurpleDarkScheme else PurpleLightScheme
+        AppTheme.RED -> if (darkTheme) RedDarkScheme else RedLightScheme
+        AppTheme.GREEN -> if (darkTheme) GreenDarkScheme else GreenLightScheme
     }
 
     MaterialTheme(
