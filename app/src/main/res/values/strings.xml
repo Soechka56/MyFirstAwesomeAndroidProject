@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">MyFirstAwesomeAndroidProject</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Привет. Давай дружить.</string>
+    <string name="login_email_label">почта</string>
+    <string name="login_password_label">пароль</string>
+    <string name="login_sign_up_button">подружиться</string>
+    <string name="error_email_empty">поле адреса почты не может быть пустым</string>
+    <string name="error_email_invalid">некорректный адрес электронной почты</string>
+    <string name="error_password_empty">поле пароля не может быть пустым</string>
+    <string name="error_password_too_short">пароль должен быть минимум 8 символов</string>
+
+    <!-- Notes Screen -->
+    <string name="notes_email_label">почта: %s</string>
+    <string name="notes_add_button">написать заметку!</string>
+    <string name="notes_list_title">список заметок:</string>
+
+    <!-- Add Note Screen -->
+    <string name="add_note_error_title_empty">заголовок не может быть пустым</string>
+    <string name="add_note_button_save">сохранить заметку!</string>
+    <string name="add_note_label_title">заголовок</string>
+    <string name="add_note_label_text">текст заметки</string>
+    <string name="theme_selector_label">Нажмите меню для выбора темы</string>
+
+
 </resources>
