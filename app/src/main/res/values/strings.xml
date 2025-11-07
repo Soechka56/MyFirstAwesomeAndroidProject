@@ -52,4 +52,6 @@
     <string name="answer_for_message">Ответить</string>
     <string name="reply_for_notification">Ответьте на сообщение</string>
     <string name="notification_not_found_error">Уведомление с ID %1$d не найдено</string>
+    <string name="no_notifications_to_clear">Уведомлений для удаления нет</string>
+    <string name="all_notifications_cleared">Все уведомления удалены</string>
 </resources>

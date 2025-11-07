@@ -35,8 +35,16 @@ class NotificationHandler(
     }
 
     fun clearAllNotifications() {
-        notificationManager.cancelAll()
-        notificationCounter = 0
+        if (notificationCounter > 0) {
+            notificationManager.cancelAll()
+            notificationCounter = 0
+
+            val message = ctx.getString(R.string.all_notifications_cleared)
+            Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show()
+        } else {
+            val message = ctx.getString(R.string.no_notifications_to_clear)
+            Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun showNotification(
