@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">MyFirstAwesomeAndroidProject</string>
+
+    <!-- Main Screen -->
+    <string name="button_execute">Запустить корутины</string>
+    <string name="button_cancel">Остановить корутины</string>
+
+    <string name="text_count_of_coroutines">Введите количество запускаемых корутин</string>
+    <string name="run_not_parallel">Последовательный запуск</string>
+    <string name="run_parallel">Параллельный запуск</string>
+    <string name="run_lazy">Отложенный запуск</string>
+    <string name="run_background">Работа в фоне</string>
+    <string name="total_completed_coroutines">Последняя корутина: %1$d</string>
+    <string name="canceled_coroutines">Было отменено столько корутин:</string>
+
+
+    <string name="submit_button">Ок</string>
+    <!-- Main Screen -->
+
+
+    <!-- Exceptions -->
+    <string name="exception_network">Сетевая ошибка, проверьте интернет</string>
+    <string name="exception_token">Токен истёк, войдите заново</string>
+    <string name="exception_hash">Ошибка проверки, данные повреждены</string>
+    <!-- Exceptions -->
+
+
+    <!-- Dispatchers -->
+    <string name="dispatcher_default">Dispatchers.Default</string>
+    <string name="dispatcher_io">Dispatchers.IO</string>
+    <string name="dispatcher_main">Dispatchers.Main</string>
 </resources>
