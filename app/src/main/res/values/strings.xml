@@ -1,3 +1,118 @@
 <resources>
     <string name="app_name">MyFirstAwesomeAndroidProject</string>
+    <string name="title">My Album Playlist</string>
+
+    <!-- Login Screen -->
+    <string name="login_email_label">почта</string>
+    <string name="login_password_label">пароль</string>
+    <string name="login_login_in_button">войти</string>
+    <string name="login_to_sign_screen_link">нет аккаунта?</string>
+
+    <!-- Login Screen -->
+
+
+    <!-- Sign Screen -->
+    <string name="sign_username_title">имя пользователя</string>
+    <string name="sign_password_re_label">введите пароль еще раз</string>
+    <string name="sign_sign_up_button">зарегистрироваться</string>
+    <string name="sign_to_login_screen_link">есть аккаунт?</string>
+
+
+    <!-- Sign Screen -->
+
+
+    <!-- bottom navigation -->
+    <string name="favorites_title">Избранное</string>
+    <string name="albums_title">Альбомы</string>
+    <string name="add_album_title">Добавить</string>
+    <string name="profile_title">Профиль</string>
+    <!-- bottom navigation -->
+
+    <!-- errors -->
+    <string name="username_password_too_shor">имя пользователя должно быть минимум 3 символа!</string>
+    <string name="error_email_empty">поле адреса почты не может быть пустым!</string>
+    <string name="error_email_invalid">некорректный адрес электронной почты!</string>
+    <string name="error_email_not_exist">данный пользователь не зарегистрирован</string>
+    <string name="error_password_not_correct">неправильный пароль</string>
+    <string name="error_password_empty">поле пароля не может быть пустым!</string>
+    <string name="error_passwords_match">повторно введенный пароль не совпадает!</string>
+    <string name="error_password_too_short">пароль должен быть минимум 8 символов!</string>
+    <string name="error_user_creation_failed">данный пользователь уже зарегистрирвоан!</string>
+    <!-- errors -->
+
+    <!-- profile screen -->
+    <string name="profile_logout">Logout</string>
+    <string name="profile_delete_account">Удалить аккаунт</string>
+
+    <string name="profile_email">Email: %1$s</string>
+    <string name="profile_user_id">ID: %1$d</string>
+    <string name="profile_favorites_count">Избранных альбомов: %1$d</string>
+
+    <string name="profile_delete_dialog_title">Удалить аккаунт?</string>
+    <string name="profile_delete_dialog_text">Аккаунт будет помечен удалённым. В течение 7 дней можно восстановить.</string>
+
+    <string name="deleted_title">Аккаунт удалён</string>
+    <string name="deleted_text">Этот аккаунт был удалён. Вы можете восстановить его или удалить окончательно.</string>
+    <string name="deleted_text_days_left">Можно восстановить в течение %1$d дн.</string>
+    <string name="deleted_text_expired">Срок восстановления истёк.</string>
+    <string name="deleted_restore">Восстановить аккаунт</string>
+    <string name="deleted_hard_delete">Удалить окончательно</string>
+
+    <string name="deleted_hard_delete_dialog_title">Удалить окончательно?</string>
+    <string name="deleted_hard_delete_dialog_text">Восстановить уже не получится.</string>
+
+
+    <string name="common_cancel">Отмена</string>
+    <string name="common_delete">Удалить</string>
+    <string name="common_ok">океей</string>
+    <!-- profile screen -->
+
+
+    <!-- content screens -->
+    <string name="content_sort_action">Сорт.</string>
+    <string name="content_sort_title">Сортировка</string>
+    <string name="content_empty_list">Альбомов пока нет</string>
+
+    <string name="favorite_empty_list">Избранных альбомов нет</string>
+
+    <string name="album_cover_content_description">Обложка альбома</string>
+    <string name="album_cover_placeholder">Нет\nобложки</string>
+
+    <string name="album_rating_short">❄️ %1$.1f (%2$d)</string>
+    <string name="album_rate_action">Оценить</string>
+    <string name="favorite_add_action">Добавить в избранное</string>
+    <string name="favorite_remove_action">Удалить из избранного</string>
+
+    <string name="album_details_title">Карточка альбома</string>
+    <string name="album_not_found">Альбом не найден</string>
+
+    <string name="rating_section_title">Оценки</string>
+    <string name="rating_count">Оценок: %1$d</string>
+    <string name="rating_rhymes_images">Рифмы / образы: %1$.1f</string>
+    <string name="rating_structure_rhythm">Структура / ритмика: %1$.1f</string>
+    <string name="rating_personality_charisma">Индивидуальность / харизма: %1$.1f</string>
+    <string name="rating_atmosphere_vibe">Атмосфера / вайб: %1$.1f</string>
+    <string name="rating_overall">Общая оценка: %1$.1f</string>
+    <string name="rating_empty">Пока нет оценок</string>
+    <string name="rating_dialog_title">Оценка</string>
+    <string name="rating_dialog_save">Сохранить</string>
+    <string name="rating_slider_rhymes_images">Рифмы / образы: %1$d</string>
+    <string name="rating_slider_structure_rhythm">Структура / ритмика: %1$d</string>
+    <string name="rating_slider_personality_charisma">Индивидуальность / харизма: %1$d</string>
+    <string name="rating_slider_atmosphere_vibe">Атмосфера / вайб: %1$d</string>
+
+    <string name="new_item_save">Сохранить</string>
+    <string name="new_item_cover_placeholder">Выберите обложку</string>
+    <string name="new_item_album_name_label">Название альбома</string>
+    <string name="new_item_singer_name_label">Имя исполнителя</string>
+
+    <string name="recovery_profile_title">Воссатновление профиля</string>
+    <string name="deleted_restore_in_progress">Восстановление...</string>
+
+    <string name="sort_name_asc">По названию </string>
+    <string name="sort_name_desc">По названию от конца</string>
+    <string name="sort_singer_asc">По исполнителю </string>
+    <string name="sort_singer_desc">По исполнителю от конца</string>
+    <!-- content screens -->
+
 </resources>
