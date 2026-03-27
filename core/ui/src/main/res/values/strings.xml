@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="battle_log_unknown_mode">Unknown mode</string>
+    <string name="battle_log_finished">Battle finished</string>
+    <string name="battle_log_id">Battle ID: %1$s</string>
+    <string name="battle_log_trophies">Trophies</string>
+    <string name="battle_log_not_available">N/A</string>
+    <string name="player_unknown_name">Unknown player</string>
+    <string name="player_no_tag">No tag</string>
+    <string name="player_power_value">Power %1$d</string>
+    <string name="player_unknown_power">Power ?</string>
+    <string name="player_trophies_value">%1$d trophies</string>
+    <string name="player_no_trophies">No trophies</string>
+    <string name="player_unknown_avatar">404</string>
+</resources>

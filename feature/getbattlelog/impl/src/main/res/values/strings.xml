@@ -1,0 +1,16 @@
+<resources>
+    <string name="get_battle_log_title">Battle log for %1$s</string>
+    <string name="get_battle_log_back">Back</string>
+    <string name="get_battle_log_loading">Loading</string>
+    <string name="get_battle_log_empty">Nothing found</string>
+    <string name="get_battle_log_players_title">Players</string>
+    <string name="battle_log_details_title">Battle: %1$s</string>
+    <string name="battle_log_details_result">Result: %1$s</string>
+    <string name="battle_log_details_duration">Duration: %1$d seconds</string>
+    <string name="battle_log_details_my_team">first team:</string>
+    <string name="battle_log_details_enemy_team">second team:</string>
+    <string name="battle_log_details_unknown">Unknown</string>
+
+    <string name="battle_log_network">Data source: server</string>
+    <string name="battle_log_local">Data source: local</string>
+</resources>
