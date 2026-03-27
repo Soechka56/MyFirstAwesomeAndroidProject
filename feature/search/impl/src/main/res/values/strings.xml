@@ -1,0 +1,8 @@
+<resources>
+    <string name="search_title">Search</string>
+    <string name="search_hashtag_label">Player hashtag</string>
+    <string name="search_hashtag_placeholder">#P0LYC</string>
+    <string name="search_button">Show battle log</string>
+    <string name="search_loading">Loading</string>
+    <string name="search_open_details">Open details</string>
+</resources>
