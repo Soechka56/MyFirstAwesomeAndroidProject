@@ -8,6 +8,4 @@ android {
 
 dependencies {
     implementation(libs.androidx.navigation3.runtime)
-    implementation(project(path = ":core:build-config:api"))
-    implementation(project(path = ":core:domain"))
 }
