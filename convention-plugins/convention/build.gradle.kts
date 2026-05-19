@@ -48,5 +48,10 @@ gradlePlugin {
             id = libs.plugins.app.compose.screen.get().pluginId
             implementationClass = "ComposeScreenConventionPlugin"
         }
+
+        register("koin") {
+            id = "app.koin"
+            implementationClass = "KoinConventionPlugin"
+        }
     }
 }

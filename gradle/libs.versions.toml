@@ -4,6 +4,7 @@
 agp = "9.0.1"
 kotlin = "2.3.10"
 ksp = "2.3.5"
+koin = "4.2.1"
 
 min-sdk = "26"
 target-sdk = "36"
@@ -30,6 +31,11 @@ navigation3 = "1.0.1"
 serialization = "1.10.0"
 
 gradle-secrets = "2.0.1"
+
+# Firebase
+google-services = "4.4.2"
+firebase-bom = "33.14.0"
+firebase-crashlytics-plugin = "3.0.4"
 
 # Tests
 junit = "4.13.2"
@@ -64,10 +70,14 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 # Retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+# Room
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+
+# Navigation bundle
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "serialization" }
 androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3" }
 androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3" }
@@ -86,6 +96,17 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 androidx-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
 firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+
+# Koin
+koin-android = {group = "io.insert-koin", name = "koin-android", version.ref = "koin"}
+koin-compose-viewmodel = {group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin"}
+koin-navigation3 = {group = "io.insert-koin", name = "koin-compose-navigation3", version.ref = "koin"}
+
 [bundles]
 compose-ui = ["compose-ui", "compose-ui-graphics", "compose-ui-tooling", "compose-ui-tooling-preview"]
 
@@ -97,9 +118,12 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 gradle-secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "gradle-secrets" }
+gms-google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 
 # Project Internal convention plugins
 app-android-application = { id = "app.android.application"}
 app-android-library = { id = "app.android.library" }
 app-compose-base = { id = "app.compose.base" }
 app-compose-screen = { id = "app.compose.screen" }
+app-koin = { id = "app.koin" }

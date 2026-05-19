@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.app.android.application)
     alias(libs.plugins.app.compose.screen)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.app.koin)
+    alias(libs.plugins.gms.google.services)
+    alias(libs.plugins.firebase.crashlytics.plugin)
 }
 
 
@@ -36,6 +39,8 @@ dependencies {
     implementation(project(path = ":core:build-config:impl"))
     implementation(project(path = ":core:di"))
     implementation(project(path = ":core:navigation"))
+    implementation(project(path = ":core:analytics:api"))
+    implementation(project(path = ":core:analytics:impl"))
 
     implementation(project(path=":core:domain"))
     implementation(project(path=":core:data"))
@@ -46,4 +51,10 @@ dependencies {
     implementation(project(path=":feature:getbattlelog:impl"))
     implementation(project(path=":feature:search:api"))
     implementation(project(path=":feature:search:impl"))
+
+    // Firebase (BOM manages all versions automatically)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.messaging)
 }

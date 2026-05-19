@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.example.api"
+    namespace = "com.example.buildconfig.api"
 }

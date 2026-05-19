@@ -30,12 +30,33 @@ class BattleLogMapper {
     fun mapPlayers(input: BattleLogResponseDto): List<BattleLogPlayerEntity> {
         return buildList {
             input.items.orEmpty().forEachIndexed { battleIndex, battle ->
-                battle.battle?.teams.orEmpty().forEachIndexed { teamIndex, team ->
-                    team.forEachIndexed { playerIndex, player ->
+                val info = battle.battle
+                val teams = info?.teams
+                val players = info?.players
+                if (teams != null) {
+                    teams.forEachIndexed { teamIndex, team ->
+                        team.forEachIndexed { playerIndex, player ->
+                            add(
+                                BattleLogPlayerEntity(
+                                    battleId = battleIndex.toLong(),
+                                    teamIndex = teamIndex,
+                                    playerIndex = playerIndex,
+                                    tag = player.tag,
+                                    name = player.name,
+                                    brawlerId = player.brawler?.id,
+                                    brawlerName = player.brawler?.name,
+                                    power = player.brawler?.power,
+                                    trophies = player.brawler?.trophies,
+                                )
+                            )
+                        }
+                    }
+                } else if (players != null) {
+                    players.forEachIndexed { playerIndex, player ->
                         add(
                             BattleLogPlayerEntity(
                                 battleId = battleIndex.toLong(),
-                                teamIndex = teamIndex,
+                                teamIndex = 0,
                                 playerIndex = playerIndex,
                                 tag = player.tag,
                                 name = player.name,
