@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.app.android.library)
     alias(libs.plugins.app.compose.screen)
+    alias(libs.plugins.app.koin)
 }
 
 android {
@@ -12,8 +13,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.x.activity.compose)
     implementation(libs.x.lifecycle.runtime.ktx)
-    implementation(libs.x.lifecycle.viewmodel.compose)
-    implementation(libs.x.lifecycle.viewmodel.ktx)
+
     implementation(project(path = ":core:di"))
     implementation(project(path = ":core:domain"))
     implementation(project(path = ":core:designsystem"))

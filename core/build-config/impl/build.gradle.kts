@@ -10,7 +10,7 @@ if (propsFile.exists()) {
 }
 
 android {
-    namespace = "com.example.impl"
+    namespace = "com.example.buildconfig.impl"
 
     buildFeatures {
         buildConfig = true

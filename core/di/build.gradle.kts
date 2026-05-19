@@ -1,9 +1,19 @@
 plugins {
     alias(libs.plugins.app.android.library)
+    alias(libs.plugins.app.koin)
 }
 
 android {
     namespace = "com.example.di"
+
+    buildTypes {
+        debug{}
+        release{}
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
