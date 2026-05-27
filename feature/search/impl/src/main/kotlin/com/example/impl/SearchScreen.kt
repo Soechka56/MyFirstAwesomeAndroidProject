@@ -48,75 +48,73 @@ fun SearchScreen(
         }
     }
 
-    Scaffold(modifier = modifier) { paddingValues ->
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(spacing.medium),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(spacing.large),
-        ) {
-            item {
-                Text(text = stringResource(id = R.string.search_title))
-            }
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(spacing.medium),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(spacing.large),
+    ) {
+        item {
+            Text(text = stringResource(id = R.string.search_title))
+        }
 
-            item {
-                BaseCard(
+        item {
+            BaseCard(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(spacing.large),
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(spacing.medium),
                     modifier = Modifier.fillMaxWidth(),
-                    contentPadding = PaddingValues(spacing.large),
                 ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(spacing.medium),
+                    OutlinedTextField(
+                        value = uiState.hashtag,
+                        onValueChange = viewModel::updateHashtag,
+                        label = {
+                            Text(text = stringResource(id = R.string.search_hashtag_label))
+                        },
+                        placeholder = {
+                            Text(text = stringResource(id = R.string.search_hashtag_placeholder))
+                        },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+
+                    Button(
+                        onClick = viewModel::search,
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        OutlinedTextField(
-                            value = uiState.hashtag,
-                            onValueChange = viewModel::updateHashtag,
-                            label = {
-                                Text(text = stringResource(id = R.string.search_hashtag_label))
-                            },
-                            placeholder = {
-                                Text(text = stringResource(id = R.string.search_hashtag_placeholder))
-                            },
-                            singleLine = true,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-
-                        Button(
-                            onClick = viewModel::search,
-                            modifier = Modifier.fillMaxWidth(),
-                        ) {
-                            Text(text = stringResource(id = R.string.search_button))
-                        }
+                        Text(text = stringResource(id = R.string.search_button))
                     }
                 }
             }
+        }
 
-            if (uiState.isLoading) {
-                item {
-                    Text(text = stringResource(id = R.string.search_loading))
-                }
-            }
-
-            uiState.errorMessage?.let {
-                item {
-                    Text(text = it)
-                }
-            }
-
-            items(
-                items = uiState.battles,
-                key = { it.id ?: it.battleTime },
-            ) { battle ->
-                BattleLogCard(
-                    battle = battle,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            battle.id?.let { onBattleClick(it) }
-                        },
-                )
+        if (uiState.isLoading) {
+            item {
+                Text(text = stringResource(id = R.string.search_loading))
             }
         }
+
+        uiState.errorMessage?.let {
+            item {
+                Text(text = it)
+            }
+        }
+
+        items(
+            items = uiState.battles,
+            key = { it.id ?: it.battleTime },
+        ) { battle ->
+            BattleLogCard(
+                battle = battle,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        battle.id?.let { onBattleClick(it) }
+                    },
+            )
+        }
     }
+
 }
