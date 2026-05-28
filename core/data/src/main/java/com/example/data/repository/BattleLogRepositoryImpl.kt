@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import androidx.room.CoroutinesRoom
 import com.example.data.mapper.BattleLogMapper
 import com.example.data.model.BattleLogDao
 import com.example.data.model.BattleLogWithPlayers
@@ -12,18 +13,21 @@ import com.example.network.BrawlStarsApi
 import com.example.network.error.GeneralExceptionHandler
 import com.example.network.error.runCatching
 import com.example.network.error.impl.BrawlStarsExceptionHandlerImpl
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
 class BattleLogRepositoryImpl(
     private val brawlStarsApi: BrawlStarsApi,
     private val battleLogDao: BattleLogDao,
     private val battleLogMapper: BattleLogMapper,
     private val generalExceptionHandler: GeneralExceptionHandler = BrawlStarsExceptionHandlerImpl(),
+    private val dispatcher: CoroutineDispatcher
 ) : BattleLogRepository {
 
     override suspend fun searchByUserHashtag(hashtag: String): BattleLogResource<List<BattleLogItemModel>> {
         return brawlStarsApi.runCatching(generalExceptionHandler) {
-            val clearHashtag = hashtag.removePrefix("#")
-            val cachedBattleLogs = battleLogDao.getBattleLogsByHashtag(clearHashtag)
+
+            val cachedBattleLogs = withContext(dispatcher){ battleLogDao.getBattleLogsByHashtag(hashtag) }
 
             if (shouldReadFromCache(cachedBattleLogs)) {
                 return@runCatching BattleLogResource(
@@ -32,10 +36,11 @@ class BattleLogRepositoryImpl(
                 )
             }
 
-            refreshCache(clearHashtag)
+            refreshCache(hashtag)
 
             BattleLogResource(
-                data = battleLogDao.getBattleLogsByHashtag(clearHashtag).map(::toSimpleModel),
+                data = withContext(dispatcher){ battleLogDao.getBattleLogsByHashtag(hashtag)
+                    .map(::toSimpleModel) },
                 source = BattleLogDataSourceModel.SERVER,
             )
         }
@@ -43,13 +48,15 @@ class BattleLogRepositoryImpl(
 
 
     override suspend fun getBattleLogDetails(id: Long): BattleLogResource<BattleLogDetailsModel> {
-        return battleLogDao.runCatching(generalExceptionHandler) {
-            battleLogDao.getById(id)?.let { battleLog ->
-                BattleLogResource(
-                    data = toDetailModel(battleLog),
-                    source = BattleLogDataSourceModel.LOCAL,
-                )
-            } ?: error("battle log item not found")
+        return withContext(dispatcher) {
+            battleLogDao.runCatching(generalExceptionHandler) {
+                battleLogDao.getById(id)?.let { battleLog ->
+                    BattleLogResource(
+                        data = toDetailModel(battleLog),
+                        source = BattleLogDataSourceModel.LOCAL,
+                    )
+                } ?: error("battle log item not found")
+            }
         }
     }
 
@@ -69,12 +76,12 @@ class BattleLogRepositoryImpl(
         )
         val players = battleLogMapper.mapPlayers(response)
 
-        battleLogDao.clearAll()
+        withContext(dispatcher){ battleLogDao.clearAll() }
         if (battleLogs.isNotEmpty()) {
-            battleLogDao.insertBattleLogs(battleLogs)
+            withContext(dispatcher){battleLogDao.insertBattleLogs(battleLogs) }
         }
         if (players.isNotEmpty()) {
-            battleLogDao.insertPlayers(players)
+            withContext(dispatcher){ battleLogDao.insertPlayers(players) }
         }
     }
 

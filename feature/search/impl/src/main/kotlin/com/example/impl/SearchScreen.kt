@@ -1,5 +1,6 @@
 package com.example.impl
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.impl.model.GetBattleLogScreenEvent
 import org.koin.compose.viewmodel.koinViewModel
 import com.soechka1.myfirstawesomeandroidproject.feature.search.impl.R
 import com.soechka1.designsystem.component.shared.BaseCard
@@ -28,6 +30,7 @@ import com.soechka1.designsystem.theme.MyFirstAwesomeAndroidProjectThemeTokens
 import com.example.ui.BattleLogCard
 import com.example.impl.model.SearchScreenEvent
 
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun SearchScreen(
     onBattleClick: (Long) -> Unit,
@@ -42,7 +45,11 @@ fun SearchScreen(
         viewModel.events.collect { event ->
             when (event) {
                 is SearchScreenEvent.ShowSourceMessage -> {
-                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(event.messageResId),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

@@ -27,4 +27,8 @@ data class BattleLogDetailsModel(
         val power: Int?,
         val trophies: Int?
     )
+
+    companion object {
+        val EMPTY = BattleLogDetailsModel(id = -1, battleTime = "", mode = "", result = "", duration = 0, trophyChange = null, teams = emptyList())
+    }
 }
