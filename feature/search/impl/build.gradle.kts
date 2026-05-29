@@ -19,5 +19,6 @@ dependencies {
     implementation(project(path = ":feature:getbattlelog:impl"))
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
 }
