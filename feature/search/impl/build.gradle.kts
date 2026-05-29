@@ -11,12 +11,14 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.x.activity.compose)
     implementation(libs.x.lifecycle.runtime.ktx)
 
-    implementation(project(path = ":core:di"))
     implementation(project(path = ":core:domain"))
     implementation(project(path = ":core:designsystem"))
     implementation(project(path = ":core:ui"))
     implementation(project(path = ":feature:getbattlelog:impl"))
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }

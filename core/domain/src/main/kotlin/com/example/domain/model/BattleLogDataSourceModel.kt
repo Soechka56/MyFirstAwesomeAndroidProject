@@ -8,4 +8,5 @@ enum class BattleLogDataSourceModel {
 data class BattleLogResource<T>(
     val data: T,
     val source: BattleLogDataSourceModel,
+    val error: String = ""
 )

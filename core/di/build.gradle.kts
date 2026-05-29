@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(project(path = ":core:build-config:api"))
     implementation(project(path = ":core:build-config:impl"))
+
     implementation(project(path = ":core:data"))
     implementation(project(path = ":core:domain"))
     implementation(project(path = ":core:network"))

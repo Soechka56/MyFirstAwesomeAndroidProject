@@ -46,6 +46,7 @@ navigationFragmentKtx = "2.9.7"
 navigationUiKtx = "2.9.7"
 foundation = "1.10.5"
 firebaseCrashlyticsBuildtools = "3.0.6"
+mockk = "1.14.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -86,6 +87,8 @@ androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 
 # Internal convention plugins deps
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

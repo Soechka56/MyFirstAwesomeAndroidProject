@@ -5,4 +5,7 @@
     <string name="search_button">Show battle log</string>
     <string name="search_loading">Loading</string>
     <string name="search_open_details">Open details</string>
+
+    <string name="battle_log_network">Data source: server</string>
+    <string name="battle_log_local">Data source: local</string>
 </resources>

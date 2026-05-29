@@ -8,7 +8,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
@@ -39,7 +44,7 @@ class MainActivity : ComponentActivity() {
             val requestPermissionLauncher = registerForActivityResult(
                 ActivityResultContracts.RequestPermission()
             ) { }
-            
+
             if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -63,39 +68,50 @@ class MainActivity : ComponentActivity() {
             MyFirstAwesomeAndroidProjectTheme {
                 val navigator = remember { Navigator(SearchNavigationKey) }
 
-                NavDisplay(
-                    backStack = navigator.backStack,
-                    onBack = { navigator.goBack() },
-                    entryProvider = entryProvider {
-                        entry<SearchNavigationKey> {
-                            SearchScreen(
-                                onBattleClick = { battleId ->
-                                    analytics.trackScreenView(
-                                        screenName = "GetBattleLogScreen",
-                                        screenClass = "MainActivity",
-                                    )
-                                    navigator.goTo(BattleLogDetailsNavigationKey(battleId))
-                                },
-                                modifier = Modifier.fillMaxSize(),
-                            )
-                        }
-                        entry<BattleLogDetailsNavigationKey> { key ->
-                            GetBattleLogScreen(
-                                battleId = key.id,
-                                cdnBaseUrl = buildConfigProvider.getBrawlerCdnBaseUrl(),
-                                onBackClick = {
-                                    analytics.trackScreenView(
-                                        screenName = "SearchScreen",
-                                        screenClass = "MainActivity",
-                                    )
-                                    navigator.goBack()
-                                },
-                                modifier = Modifier.fillMaxSize(),
-                            )
-                        }
-                    },
-                    modifier = Modifier.fillMaxSize(),
-                )
+                Scaffold { inner ->
+                    NavDisplay(
+                        backStack = navigator.backStack,
+                        onBack = remember { { navigator.goBack() } },
+
+                        transitionSpec = {
+                            EnterTransition.None togetherWith ExitTransition.None
+                        },
+
+                        popTransitionSpec = {
+                            EnterTransition.None togetherWith ExitTransition.None
+                        },
+
+                        entryProvider = entryProvider {
+                            entry<SearchNavigationKey> {
+                                SearchScreen(
+                                    onBattleClick = remember { { battleId ->
+                                        analytics.trackScreenView(
+                                            screenName = "GetBattleLogScreen",
+                                            screenClass = "MainActivity",
+                                        )
+                                        navigator.goTo(BattleLogDetailsNavigationKey(battleId))
+                                    } },
+                                    modifier = Modifier.fillMaxSize(),
+                                )
+                            }
+                            entry<BattleLogDetailsNavigationKey> { key ->
+                                GetBattleLogScreen(
+                                    battleId = key.id,
+                                    cdnBaseUrl = buildConfigProvider.getBrawlerCdnBaseUrl(),
+                                    onBackClick = remember { { analytics.trackScreenView(
+                                            screenName = "SearchScreen",
+                                            screenClass = "MainActivity",
+                                        )
+                                        navigator.goBack() } },
+                                    modifier = Modifier.fillMaxSize(),
+                                )
+                            }
+                        },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(inner),
+                    )
+                }
             }
         }
     }

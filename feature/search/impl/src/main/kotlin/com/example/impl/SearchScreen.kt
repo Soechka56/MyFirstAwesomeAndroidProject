@@ -1,5 +1,6 @@
 package com.example.impl
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.impl.model.GetBattleLogScreenEvent
 import org.koin.compose.viewmodel.koinViewModel
 import com.soechka1.myfirstawesomeandroidproject.feature.search.impl.R
 import com.soechka1.designsystem.component.shared.BaseCard
@@ -28,6 +30,7 @@ import com.soechka1.designsystem.theme.MyFirstAwesomeAndroidProjectThemeTokens
 import com.example.ui.BattleLogCard
 import com.example.impl.model.SearchScreenEvent
 
+@SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun SearchScreen(
     onBattleClick: (Long) -> Unit,
@@ -42,81 +45,83 @@ fun SearchScreen(
         viewModel.events.collect { event ->
             when (event) {
                 is SearchScreenEvent.ShowSourceMessage -> {
-                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(event.messageResId),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
     }
 
-    Scaffold(modifier = modifier) { paddingValues ->
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(spacing.medium),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(spacing.large),
-        ) {
-            item {
-                Text(text = stringResource(id = R.string.search_title))
-            }
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(spacing.medium),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(spacing.large),
+    ) {
+        item {
+            Text(text = stringResource(id = R.string.search_title))
+        }
 
-            item {
-                BaseCard(
+        item {
+            BaseCard(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(spacing.large),
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(spacing.medium),
                     modifier = Modifier.fillMaxWidth(),
-                    contentPadding = PaddingValues(spacing.large),
                 ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(spacing.medium),
+                    OutlinedTextField(
+                        value = uiState.hashtag,
+                        onValueChange = viewModel::updateHashtag,
+                        label = {
+                            Text(text = stringResource(id = R.string.search_hashtag_label))
+                        },
+                        placeholder = {
+                            Text(text = stringResource(id = R.string.search_hashtag_placeholder))
+                        },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+
+                    Button(
+                        onClick = viewModel::search,
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        OutlinedTextField(
-                            value = uiState.hashtag,
-                            onValueChange = viewModel::updateHashtag,
-                            label = {
-                                Text(text = stringResource(id = R.string.search_hashtag_label))
-                            },
-                            placeholder = {
-                                Text(text = stringResource(id = R.string.search_hashtag_placeholder))
-                            },
-                            singleLine = true,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-
-                        Button(
-                            onClick = viewModel::search,
-                            modifier = Modifier.fillMaxWidth(),
-                        ) {
-                            Text(text = stringResource(id = R.string.search_button))
-                        }
+                        Text(text = stringResource(id = R.string.search_button))
                     }
                 }
             }
+        }
 
-            if (uiState.isLoading) {
-                item {
-                    Text(text = stringResource(id = R.string.search_loading))
-                }
-            }
-
-            uiState.errorMessage?.let {
-                item {
-                    Text(text = it)
-                }
-            }
-
-            items(
-                items = uiState.battles,
-                key = { it.id ?: it.battleTime },
-            ) { battle ->
-                BattleLogCard(
-                    battle = battle,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            battle.id?.let { onBattleClick(it) }
-                        },
-                )
+        if (uiState.isLoading) {
+            item {
+                Text(text = stringResource(id = R.string.search_loading))
             }
         }
+
+        uiState.errorMessage?.let {
+            item {
+                Text(text = it)
+            }
+        }
+
+        items(
+            items = uiState.battles,
+            key = { it.id ?: it.battleTime },
+        ) { battle ->
+            BattleLogCard(
+                battle = battle,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        battle.id?.let { onBattleClick(it) }
+                    },
+            )
+        }
     }
+
 }

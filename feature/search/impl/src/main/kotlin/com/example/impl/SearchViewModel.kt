@@ -1,11 +1,13 @@
 package com.example.impl
 
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.BattleLogDataSourceModel
 import com.example.domain.usecase.SearchBattlesLogByHashtagQueryUseCase
 import com.example.impl.model.SearchScreenEvent
 import com.example.impl.model.SearchScreenState
+import com.soechka1.myfirstawesomeandroidproject.feature.search.impl.R
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -48,7 +50,14 @@ class SearchViewModel(
                         isLoading = false
                     )
                 }
-                _events.emit(SearchScreenEvent.ShowSourceMessage(resource.source.toMessage()))
+                _events.emit(
+                    SearchScreenEvent.ShowSourceMessage(
+                        when (resource.source) {
+                            BattleLogDataSourceModel.SERVER -> R.string.battle_log_network
+                            BattleLogDataSourceModel.LOCAL -> R.string.battle_log_local
+                        }
+                    )
+                )
             }.onFailure { e ->
                 _state.update {
                     it.copy(
@@ -57,13 +66,6 @@ class SearchViewModel(
                     )
                 }
             }
-        }
-    }
-
-    private fun BattleLogDataSourceModel.toMessage(): String {
-        return when (this) {
-            BattleLogDataSourceModel.SERVER -> "Data source: server"
-            BattleLogDataSourceModel.LOCAL -> "Data source: local"
         }
     }
 }
