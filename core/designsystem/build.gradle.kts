@@ -13,4 +13,5 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(project(path = ":core:domain"))
+    implementation(libs.androidx.activity)
 }
