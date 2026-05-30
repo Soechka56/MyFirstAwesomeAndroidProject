@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,14 +21,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.impl.model.GetBattleLogScreenEvent
 import org.koin.compose.viewmodel.koinViewModel
 import com.soechka1.myfirstawesomeandroidproject.feature.search.impl.R
 import com.soechka1.designsystem.component.shared.BaseCard
 import com.soechka1.designsystem.theme.MyFirstAwesomeAndroidProjectThemeTokens
 import com.example.ui.BattleLogCard
 import com.example.impl.model.SearchScreenEvent
-
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import com.soechka1.designsystem.component.shared.MyFirstAwesomeCustomView
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
 fun SearchScreen(
@@ -106,6 +114,72 @@ fun SearchScreen(
         uiState.errorMessage?.let {
             item {
                 Text(text = it)
+            }
+        }
+
+        if (uiState.battlesCountByMode.isNotEmpty()) {
+            item {
+                BaseCard(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(spacing.large),
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(spacing.medium),
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Modes played:",
+                            style = MaterialTheme.typography.titleMedium
+                        )
+
+                        val modes = uiState.battlesCountByMode.keys.toList()
+
+                        // only for test
+                        val palette = listOf(
+                            android.graphics.Color.RED,
+                            android.graphics.Color.CYAN,
+                            android.graphics.Color.GREEN,
+                            android.graphics.Color.BLUE,
+                            android.graphics.Color.YELLOW,
+                            android.graphics.Color.MAGENTA
+                        )
+
+                        val colorsToUse = modes.mapIndexed { index, _ -> palette[index % palette.size] }
+
+                        AndroidView(
+                            factory = { ctx ->
+                                MyFirstAwesomeCustomView(ctx).apply {
+                                    sectorsCount = modes.size
+                                    sectorColors = colorsToUse
+                                }
+                            },
+                            update = { view ->
+                                view.sectorsCount = modes.size
+                                view.sectorColors = colorsToUse
+                            },
+                            modifier = Modifier
+                                .padding(vertical = spacing.medium)
+                                .fillMaxWidth()
+                                .height(200.dp)
+                        )
+
+                        uiState.battlesCountByMode.entries.forEachIndexed { index, entry ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(spacing.small),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(16.dp)
+                                        .background(Color(colorsToUse[index]))
+                                )
+                                Text(text = entry.key)
+                            }
+                        }
+                    }
+                }
             }
         }
 

@@ -44,9 +44,15 @@ class SearchViewModel(
             runCatching {
                 searchBattlesLogByHashtagQueryUseCase(currentHashtag)
             }.onSuccess { resource ->
+                val countByMode = resource.data
+                    .mapNotNull { it.mode }
+                    .groupingBy { it }
+                    .eachCount()
+
                 _state.update {
                     it.copy(
                         battles = resource.data,
+                        battlesCountByMode = countByMode,
                         isLoading = false
                     )
                 }
